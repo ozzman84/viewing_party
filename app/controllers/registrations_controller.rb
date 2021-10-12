@@ -5,7 +5,7 @@ class RegistrationsController < ApplicationController
   end
 
   def create 
-    @user = User.save
+    @user = User.create(user_params)
     redirect_to root_path
   end
 

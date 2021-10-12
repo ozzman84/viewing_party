@@ -1,5 +1,5 @@
 <section id="new-user-form">
-  <%= form_with model: @user, url: sign_up_path do |f| %>
+  <%= form_with model: @user, url: sign_up_path, local: true do |f| %>
     <%= f.label :email %>
     <%= f.text_field :email %>
 

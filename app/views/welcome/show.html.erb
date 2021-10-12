@@ -1,0 +1,13 @@
+<h1>Welcome Friend</h1>
+
+<section id="sign-in">
+    <%= form_with url: sign_in_path do |f| %>
+        <%= f.label :email %>
+        <%= f.text_field :email %>
+
+        <%= f.password_field :password %>
+        <%= f.submit "Log In" %>
+    <% end %>
+</section>
+
+<%= link_to "Sign Up", sign_up_path %>

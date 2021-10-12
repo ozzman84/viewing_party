@@ -2,12 +2,10 @@
 
 <section id="sign-in">
     <%= form_with url: sign_in_path, local: true do |f| %>
-        <%= f.label :email %>
-        <%= f.text_field :email %>
-
-        <%= f.label :password %>
-        <%= f.password_field :password %>
-        
+        <%= f.label :email %><br/>
+        <%= f.text_field :email %><br/>
+        <%= f.label :password %><br/>
+        <%= f.password_field :password %><br/>
         <%= f.submit "Log In" %>
     <% end %>
 </section>

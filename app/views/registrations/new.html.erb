@@ -1,16 +1,16 @@
 <section id="new-user-form">
   <%= form_with model: @user, url: sign_up_path, local: true do |f| %>
-    <%= f.label :email %>
-    <%= f.text_field :email %>
+    <%= f.label :email %><br/>
+    <%= f.text_field :email %><br/>
 
-    <%= f.label :username %>
-    <%= f.text_field :username %>
+    <%= f.label :username %><br/>
+    <%= f.text_field :username %><br/>
 
-    <%= f.label :password %>
-    <%= f.password_field :password %>
+    <%= f.label :password %><br/>
+    <%= f.password_field :password %><br/>
 
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %>
+    <%= f.label :password_confirmation %><br/>
+    <%= f.password_field :password_confirmation %><br/>
 
     <%= f.submit "Sign Up" %>
   <% end %>

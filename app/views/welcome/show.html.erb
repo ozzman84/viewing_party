@@ -1,13 +1,15 @@
 <h1>Welcome Friend</h1>
 
-<section id="sign-in">
+<div class='container' id="sign-in">
     <%= form_with url: sign_in_path, local: true do |f| %>
         <%= f.label :email %><br/>
         <%= f.text_field :email %><br/>
         <%= f.label :password %><br/>
-        <%= f.password_field :password %><br/>
+        <%= f.password_field :password %><br/><br/>
         <%= f.submit "Log In" %>
     <% end %>
-</section>
+</div>
 
-<%= link_to "Sign Up", sign_up_path %>
+<div class='container'>
+  <%= link_to "Sign Up", sign_up_path %>
+</div>

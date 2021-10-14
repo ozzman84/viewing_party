@@ -10,7 +10,7 @@ deploy:
   provider: heroku
   api_key:
     secure: PjCGGWKmxaI+n88GBuuUvkgLnypwZ/SAHEJVp/3qyNW8LfyYNUeFoFbW5cFeklL/aoFTGX8h0Gd7MC2craYQYrh9pWBSdoDx78OmH7NuHFGCSV/Mu/quxn1W1zDwfdDGWBqRVeyU8Qwa0GcAGA/BhAoqJjxEQr6UhOJ/aF1C6SiyFZGiCBkE/nRAET8Y2VNe4BM3DIY+v/Yohg5dbt0tcCyNRfq7KokTjsQ6RuPeY5a1dhYxOiOhjictoEmMPpUDTg+yk+L6RzhwxGBWgcqh6VPjn/Zr0TnRbNfhXP+zx1DjA5cZgiyVKhm76U8GjSJr8uOyV+NSITmWza72+8HbRaZaGWLJ0Ka1TBNcf/LH14qLh61Re34Uj1EB1dhbOOuoNhmcANVhnDoXhI+hgxJWARiBi+m8l84t3ObMggP2nz4L8jFm5//rtaLm82iSJMyEq+FQtNDQr9WqZiqMdNEqxND47qpRlZ8SIVaO6MHQKAexqjLLAZ1c6IGAD/Pev2tKmrQLqkGZIOf+M511T0wHOzwk1Lo0UIN2JA3+FuWeybO3eGN2hno1zKZrHGpSvcKRvMJGdSIUDj8bFHVFCYdtKwUg06OKhK2EQdWmGi+dCCmWKq3aMRcjoGvHKw03mjNmspWT33IilCckrldtDJmY4JY10PEs7C1ocYW6CJXJdDg=
-  app:
+  app: evening-lake-82559
   run: rails db:migrate
   on:
     branch: main

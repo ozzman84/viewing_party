@@ -1,0 +1,130 @@
+{
+    "id": 281984,
+    "cast": [
+        {
+            "adult": false,
+            "gender": 1,
+            "id": 146250,
+            "known_for_department": "Acting",
+            "name": "Erika Okuda",
+            "original_name": "Erika Okuda",
+            "popularity": 0.772,
+            "profile_path": "/i05TOe2FyOsQkiIUZmxV4A5Gryc.jpg",
+            "cast_id": 0,
+            "character": "Tomomi",
+            "credit_id": "53c447660e0a26157600d85c",
+            "order": 1
+        },
+        {
+            "adult": false,
+            "gender": 1,
+            "id": 1341574,
+            "known_for_department": "Acting",
+            "name": "Mina Shimizu",
+            "original_name": "Mina Shimizu",
+            "popularity": 1.4,
+            "profile_path": "/pBXiwp62JIYCDrSfD5b9Lt9u5GC.jpg",
+            "cast_id": 1,
+            "character": "Natsuko",
+            "credit_id": "53c4477a0e0a26157f00d888",
+            "order": 2
+        },
+        {
+            "adult": false,
+            "gender": 2,
+            "id": 1077382,
+            "known_for_department": "Acting",
+            "name": "Sô Sakamoto",
+            "original_name": "Sô Sakamoto",
+            "popularity": 0.608,
+            "profile_path": null,
+            "cast_id": 2,
+            "character": "Koji",
+            "credit_id": "53c447efc3a3684cdf00a6c7",
+            "order": 3
+        },
+        {
+            "adult": false,
+            "gender": 2,
+            "id": 545498,
+            "known_for_department": "Acting",
+            "name": "Ryûnosuke Kawai",
+            "original_name": "Ryûnosuke Kawai",
+            "popularity": 1.646,
+            "profile_path": "/wIEpUV9nn5FWTt9EChbAf5gsUkg.jpg",
+            "cast_id": 3,
+            "character": "Kenta",
+            "credit_id": "53c44803c3a3686ccf000faf",
+            "order": 4
+        },
+        {
+            "adult": false,
+            "gender": 1,
+            "id": 1064811,
+            "known_for_department": "Acting",
+            "name": "Aya Omasa",
+            "original_name": "Aya Omasa",
+            "popularity": 1.708,
+            "profile_path": "/yGRMdQSiMBAGbu7k0W6pxUt3RKE.jpg",
+            "cast_id": 8,
+            "character": "Kana",
+            "credit_id": "569eb4949251415a070024f2",
+            "order": 6
+        },
+        {
+            "adult": false,
+            "gender": 1,
+            "id": 1711441,
+            "known_for_department": "Acting",
+            "name": "Maki Sawa",
+            "original_name": "Maki Sawa",
+            "popularity": 0.6,
+            "profile_path": "/c3H90pKsJqZjDSvuK3QXpElpXH5.jpg",
+            "cast_id": 9,
+            "character": "mama",
+            "credit_id": "58319375c3a3685ba102783d",
+            "order": 7
+        }
+    ],
+    "crew": [
+        {
+            "adult": false,
+            "gender": 2,
+            "id": 579313,
+            "known_for_department": "Directing",
+            "name": "Eiji Uchida",
+            "original_name": "Eiji Uchida",
+            "popularity": 1.153,
+            "profile_path": "/nIATwW4i3zncVcd8TYSmTgQVX3P.jpg",
+            "credit_id": "53c44836c3a3684cf4009d30",
+            "department": "Directing",
+            "job": "Director"
+        },
+        {
+            "adult": false,
+            "gender": 2,
+            "id": 579313,
+            "known_for_department": "Directing",
+            "name": "Eiji Uchida",
+            "original_name": "Eiji Uchida",
+            "popularity": 1.153,
+            "profile_path": "/nIATwW4i3zncVcd8TYSmTgQVX3P.jpg",
+            "credit_id": "53c44868c3a3684cf900a196",
+            "department": "Writing",
+            "job": "Writer"
+        },
+        {
+            "adult": false,
+            "gender": 0,
+            "id": 1341576,
+            "known_for_department": "Writing",
+            "name": "Pudding Watanabe",
+            "original_name": "Pudding Watanabe",
+            "popularity": 0.6,
+            "profile_path": null,
+            "credit_id": "53c44854c3a3684ce900a5bd",
+            "department": "Writing",
+            "job": "Writer"
+        }
+    ]
+}

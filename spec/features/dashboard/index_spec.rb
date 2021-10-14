@@ -11,7 +11,10 @@ RSpec.describe 'Dashboard' do
   end
   describe 'User Dashboard' do
     before :each do
-      @user = User.create!(password: 'test', username: 'johhy', email: 'johhny@gmail.com')
+      @user1 = User.create!(password: 'test', username: 'johhy', email: 'johhny@gmail.com')
+      @user2 = User.create!(password: 'password', username: 'mike', email: 'mike@gmail.com')
+      @user3 = User.create!(password: 'doggie', username: 'blop', email: 'smoke@gmail.com')
+      @user1_friend = Friend.create!(user_id: @user1.id, friend_id: @user2.id)
       # binding.pry
       # get(:show, session: {'user_id' => @user.id})
       visit root_path
@@ -25,7 +28,7 @@ RSpec.describe 'Dashboard' do
 
     it 'returns Welcome links' do
       within '#username' do
-        expect(page).to have_content("Welcome #{@user.username}")
+        expect(page).to have_content("Welcome #{@user1.username}")
       end
     end
 
@@ -39,6 +42,20 @@ RSpec.describe 'Dashboard' do
     it 'has friends section' do
       within '#friends' do
         expect(page).to have_content('Friends')
+        expect(page).to have_content(@user2.username)
+      end
+
+      within '#new-friend' do
+        fill_in 'friend', with: "smoke@gmail.com"
+        click_on "Make Friend"
+      end
+
+      within '#friends' do
+        expect(page).to have_content(@user3.username)
+      end
+
+      within '#flashes' do
+        expect(page).to have_content("Added #{@user3.username} as a friend")
       end
     end
 

@@ -1,6 +1,14 @@
 require 'rails_helper'
+require 'timecop'
 
 RSpec.describe 'Dashboard' do
+  before do
+    Timecop.freeze(Time.local(2021, 10, 12))
+  end
+
+  after do
+    Timecop.return
+  end
   describe 'User Dashboard' do
     before :each do
       @user = User.create!(password: 'test', username: 'johhy', email: 'johhny@gmail.com')
@@ -23,7 +31,7 @@ RSpec.describe 'Dashboard' do
 
     it 'returns button to discover movies' do
       within '#discover-movies' do
-        expect(page).to have_button('Discover New Movies')
+        expect(page).to have_link('Discover New Movies')
         #expect(path).to eq(discover_new_movies_path) Add path once created
       end
     end

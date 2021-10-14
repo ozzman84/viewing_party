@@ -12,10 +12,23 @@ class Movie
     @id = params[:id]
     @name = params[:original_title]
     @vote_average = params[:vote_average]
+    @vote_count = params[:vote_count]
     @run_time = params[:runtime]
     @genres = params[:genres]
     @summary = params[:overview]
     @cast = params[:cast]
     @reviews = params[:reviews]
+  end
+
+  def create_cast
+    @cast.map do |member|
+      CastMember.new(member[:name], member[:character])
+    end
+  end
+
+  def create_reviews
+    @reviews.map do |review|
+      Review.new(review[:author], review[:content])
+    end
   end
 end

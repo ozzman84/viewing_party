@@ -22,15 +22,15 @@ RSpec.describe MoviesService, type: :service do
 
   describe 'search by movie name' do
     it 'returns up to 40 movies by keyword' do
-      stub_request(:get, "https://api.themoviedb.org/3/search/keyword?api_key=da336b32ae4779ba9aa007085c1574ec&query=fight").to_return(body: File.read(File.join('spec', 'fixtures', 'tmdb_search_fight_page1.json')))
-      stub_request(:get, "https://api.themoviedb.org/3/search/keyword?api_key=da336b32ae4779ba9aa007085c1574ec&query=fight&page=2").to_return(body: File.read(File.join('spec', 'fixtures', 'tmdb_search_fight_page2.json')))
+      stub_request(:get, "https://api.themoviedb.org/3/search/movie?api_key=da336b32ae4779ba9aa007085c1574ec&query=fight").to_return(body: File.read(File.join('spec', 'fixtures', 'tmdb_search_fight_page1.json')))
+      stub_request(:get, "https://api.themoviedb.org/3/search/movie?api_key=da336b32ae4779ba9aa007085c1574ec&query=fight&page=2").to_return(body: File.read(File.join('spec', 'fixtures', 'tmdb_search_fight_page2.json')))
 
       expect(MoviesService.movies_by_name('fight').first.name).to eq('fight')
       expect(MoviesService.movies_by_name('fight').length).to eq(40)
     end
 
     it 'returns up to 40 movies by keyword' do
-      stub_request(:get, "https://api.themoviedb.org/3/search/keyword?api_key=da336b32ae4779ba9aa007085c1574ec&query=batman").to_return(body: File.read(File.join('spec', 'fixtures', 'tmdb_search_batman.json')))
+      stub_request(:get, "https://api.themoviedb.org/3/search/movie?api_key=da336b32ae4779ba9aa007085c1574ec&query=batman").to_return(body: File.read(File.join('spec', 'fixtures', 'tmdb_search_batman.json')))
 
       expect(MoviesService.movies_by_name('batman').first.name).to eq('batman v superman ultimate edition')
       expect(MoviesService.movies_by_name('batman').length).to eq(3)

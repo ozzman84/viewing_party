@@ -8,5 +8,7 @@ Rails.application.routes.draw do
 
   resources 'dashboard', only: :index
 
+  post 'new_friend', to: 'friends#create'
+
   resources 'movies'
 end

@@ -3,7 +3,7 @@
     <ol>
     <% @movies.each do |movie| %>
         <div id="movie-search-item-<%= movie.id %>">
-          <li><%= link_to "#{movie.name}", movie_path(movie.id) %>  Vote Count: <%= movie.vote_count %></li>
+          <li><%= link_to "#{movie.name}", details_path(movie.id) %>  Vote Count: <%= movie.vote_count %></li>
         </div>
     <% end %>
     </ol>

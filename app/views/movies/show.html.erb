@@ -1,5 +1,9 @@
 <%= "#{@movie.name}" %>
 
+<div class='container' id='create-party'>
+  <%= button_to 'Create A Viewing Party', new_movie_event_path(@movie.id), method: :get %>
+</div>
+
 <div id="run-time">
   <h5>Run Time: </h5>
   <%= "#{@movie.run_time}" %>

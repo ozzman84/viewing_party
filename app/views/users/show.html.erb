@@ -1,0 +1,22 @@
+<h1>Users#show</h1>
+<div class='test' id='username'>
+  <h1><%= "Welcome #{current_user.username}" %></h1>
+</div>
+
+<div class='test' id='discover-movies'>
+  <h1><%= link_to 'Discover New Movies', movies_path %></h1>
+</div>
+
+<div class='test' id='friends'>
+
+  <%= render "new_friend_form" %>
+
+  <h1>Friends</h1>
+  <% current_user.get_friends.each do |friend| %>
+    <%= friend.username %>
+  <% end %>
+</div>
+
+<div class='test' id='viewing-party'>
+  <h1>Viewing Parties</h1>
+</div>

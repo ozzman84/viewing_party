@@ -10,5 +10,7 @@ Rails.application.routes.draw do
 
   post 'new_friend', to: 'friends#create'
 
-  resources 'movies'
+  resources 'movies' do
+    resources 'events', only: [:new, :create]
+  end
 end

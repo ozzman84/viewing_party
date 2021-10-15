@@ -31,6 +31,7 @@ RSpec.describe 'Movies Show Page' do
         click_on("Inception")
       end
     end
+
     it 'Displays all Information about the movie' do
       within("#cast") do
       expect(page).to have_content("Cast:\nLeonardo DiCaprio As Dom Cobb")
@@ -42,6 +43,14 @@ RSpec.describe 'Movies Show Page' do
       within("#reviews") do
         expect(page).to have_content("Reviews:\nohlalipop")
       end
+    end
+
+    it 'has a button to create a viewing party' do
+      expect(page).to have_button('Create A Viewing Party')
+
+      click_on 'Create A Viewing Party'
+
+      expect(current_path).to eq(new_movie_event_path(27205))
     end
   end
 end

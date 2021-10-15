@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Movies Index Page' do
+RSpec.describe 'Movies Index Page', :vcr do
   describe 'display' do
     before :each do
       stub_request(:get, "https://api.themoviedb.org/3/discover/movie?api_key=#{ENV["movie_api_key"]}&sort_by=vote_count.desc").to_return(body: File.read(File.join('spec', 'fixtures', 'tmdb_discover_movies_by_vote_count_page1.json')))
@@ -40,22 +40,14 @@ RSpec.describe 'Movies Index Page' do
         click_on("Inception")
       end
 
-      expect(current_path).to eq("/movies/27205")
+      expect(current_path).to eq(details_path)
     end
 
     it 'can display search for movies by keyword' do
-      expect(current_path).to eq("/movies")
+      fill_in 'query', with: 'batman'
+      click_on("Search")
 
-      within("#movies-home") do
-        fill_in 'query', with: 'batman'
-        click_on("Search")
-      end
-      expect(current_path).to eq(movies_path)
-      within("#movie-search-item-281984") do
-        expect(page).to have_link("batman v superman ultimate edition")
-        click_on("batman v superman ultimate edition")
-      end
-      expect(current_path).to eq("/movies/281984")
+      expect(page).to have_link("batman v superman ultimate edition")
     end
   end
 end

@@ -3,7 +3,7 @@ class MovieListItem
               :name,
               :vote_count
 
-  def initialize(id, name, vote_count = nil)
+  def initialize(id, name, vote_count=nil)
     @id = id
     @name = name
     @vote_count = vote_count

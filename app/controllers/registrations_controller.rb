@@ -1,16 +1,18 @@
 class RegistrationsController < ApplicationController
-  def new
+
+  def new 
     @user = User.new
   end
 
-  def create
-    User.create(user_params)
+  def create 
+    @user = User.create(user_params)
     redirect_to root_path
   end
 
-  private
+  private 
 
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation, :username)
   end
+
 end

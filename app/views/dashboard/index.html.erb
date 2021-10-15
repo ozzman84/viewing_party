@@ -1,5 +1,5 @@
 <div class='test' id='username'>
-  <h1><%= "Welcome #{current_user.username}" %></h1>
+  <h1><%= "Welcome #{@user.username}" %></h1>
 </div>
 
 <div class='test' id='discover-movies'>
@@ -11,7 +11,7 @@
   <%= render "new_friend_form" %>
 
   <h1>Friends</h1>
-  <% current_user.get_friends.each do |friend| %>
+  <% @user.get_friends.each do |friend| %>
     <%= friend.username %>
   <% end %>
 </div>

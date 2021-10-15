@@ -1,6 +1,5 @@
-<h1>Users#new</h1>
-<div class='container' id="new-user-form">
-  <%= form_with model: @user, local: true do |f| %>
+<section id="new-user-form">
+  <%= form_with model: @user, url: sign_up_path, local: true do |f| %>
     <%= f.label :email %><br/>
     <%= f.text_field :email %><br/>
 
@@ -15,4 +14,4 @@
 
     <%= f.submit "Sign Up" %>
   <% end %>
-</div>
+</section>

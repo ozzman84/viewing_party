@@ -3,18 +3,12 @@ Rails.application.routes.draw do
   root 'welcome#show'
   get 'sign_in', to: 'sessions#new'
   post 'sign_in', to: 'sessions#create'
+  get 'sign_up', to: 'registrations#new'
+  post 'sign_up', to: 'registrations#create'
 
-  resource :users, only: :create
-  get 'dashboard', controller: :users, action: :show
-  get 'sign_up', controller: :users, action: :new
+  resources 'dashboard', only: :index
 
-  resources :friends, only: :create
+  post 'new_friend', to: 'friends#create'
 
-  resources :events, only: %i[new create]
-
-  resources :movies, only: :index
-
-  scope :movies do
-    resource :details, only: :show
-  end
+  resources 'movies'
 end

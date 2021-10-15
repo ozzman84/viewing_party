@@ -2,19 +2,28 @@ require 'rails_helper'
 require 'timecop'
 
 RSpec.describe 'Dashboard' do
+  before do
+    Timecop.freeze(Time.local(2021, 10, 12))
+  end
+
+  after do
+    Timecop.return
+  end
   describe 'User Dashboard' do
     before :each do
       @user1 = User.create!(password: 'test', username: 'johhy', email: 'johhny@gmail.com')
       @user2 = User.create!(password: 'password', username: 'mike', email: 'mike@gmail.com')
       @user3 = User.create!(password: 'doggie', username: 'blop', email: 'smoke@gmail.com')
       @user1_friend = Friend.create!(user_id: @user1.id, friend_id: @user2.id)
-
+      # binding.pry
+      # get(:show, session: {'user_id' => @user.id})
       visit root_path
       within '#sign-in' do
         fill_in 'email', with: 'johhny@gmail.com'
         fill_in 'password', with: 'test'
         click_on "Log In"
       end
+
     end
 
     it 'returns Welcome links' do
@@ -26,6 +35,7 @@ RSpec.describe 'Dashboard' do
     it 'returns button to discover movies' do
       within '#discover-movies' do
         expect(page).to have_link('Discover New Movies')
+        #expect(path).to eq(discover_new_movies_path) Add path once created
       end
     end
 

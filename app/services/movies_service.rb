@@ -24,7 +24,6 @@ class MoviesService < ApiService
     private
 
     def movie_list_maker(param)
-      binding.pry
       param[:results].map do |movie|
         name = movie[:title].nil? ? movie[:name] : movie[:title]
         MovieListItem.new(movie[:id], name, movie[:vote_count])

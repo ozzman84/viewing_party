@@ -15,7 +15,7 @@ RSpec.describe 'Event New Form', :vcr do
         visit new_event_path(id: 281984)
       end
 
-      it 'has Movie title above form' do
+      xit 'has Movie title above form' do
         expect(page).to have_content('Inception')
       end
     end

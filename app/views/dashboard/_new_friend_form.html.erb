@@ -1,5 +1,5 @@
 <section id="new-friend">
-  <%= form_with url: friends_path, local: true do |form| %>
+  <%= form_with url: 'new_friend', local: true do |form| %>
     <%= form.label :friend %>
     <%= form.text_field :friend %>
     <%= form.submit "Make Friend" %>

@@ -1,6 +1,6 @@
-require 'rails_helper'
+require 'rails_helper' 
 
-RSpec.describe 'New Registration Page', :vcr do
+RSpec.describe 'New Registration Page' do
   describe 'display' do
     before :each do
       visit(sign_up_path)
@@ -19,7 +19,7 @@ RSpec.describe 'New Registration Page', :vcr do
 
         click_on("Sign Up")
       end
-      expect(current_path).to eq(dashboard_path)
+      expect(current_path).to eq(root_path)
     end
   end
 end

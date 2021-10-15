@@ -1,6 +1,7 @@
 class ApiService
   def self.receive_data(endpoint)
     data = Faraday.get(endpoint)
-    JSON.parse(data.body, symbolize_names: true)
+    data = data.body
+    JSON.parse(data, symbolize_names: true)
   end
 end

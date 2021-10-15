@@ -3,6 +3,5 @@ class EventsController < ApplicationController
     @event = Event.new
   end
 
-  def create
-  end
+  def create; end
 end

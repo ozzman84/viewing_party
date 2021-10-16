@@ -16,28 +16,22 @@ RSpec.describe 'Movies Show Page' do
 
       stub_request(:get, "https://api.themoviedb.org/3/search/movie?api_key=#{ENV["movie_api_key"]}&query=batman").to_return(body: File.read(File.join('spec', 'fixtures', 'tmdb_search_batman.json')))
 
-      user1 = User.create!(email: "doggass420@butt.com", password: 'password', username: 'PresidentBush')
-      visit(root_path)
-      within("#sign-in") do
-        fill_in 'email', with: "doggass420@butt.com"
-        fill_in 'password', with: 'password'
-        click_on "Log In"
-      end
-      click_on 'Discover New Movies'
-      within("#movies-home") do
-        click_on 'Top 40 Movies'
-      end
-      within("#top-movie-27205") do
-        click_on("Inception")
-      end
+      @user1 = User.create!(email: "doggass420@butt.com", password: 'password', username: 'PresidentBush')
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user1)
+      visit(movies_path)
+
+      click_on("Inception")
     end
+
     it 'Displays all Information about the movie' do
+      expect(current_path).to eq(details_path)
+      
       within("#cast") do
-      expect(page).to have_content("Cast:\nLeonardo DiCaprio As Dom Cobb")
+        expect(page).to have_content("Cast:\nLeonardo DiCaprio As Dom Cobb")
       end
 
       within("#run-time") do
-      expect(page).to have_content("Run Time:\n148")
+        expect(page).to have_content("Run Time:\n148")
       end
       within("#reviews") do
         expect(page).to have_content("Reviews:\nohlalipop")

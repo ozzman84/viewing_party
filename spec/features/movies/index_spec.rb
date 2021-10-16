@@ -40,7 +40,7 @@ RSpec.describe 'Movies Index Page' do
         click_on("Inception")
       end
 
-      expect(current_path).to eq("/movies/27205")
+      expect(current_path).to eq(details_path)
     end
 
     it 'can display search for movies by keyword' do
@@ -55,7 +55,7 @@ RSpec.describe 'Movies Index Page' do
         expect(page).to have_link("batman v superman ultimate edition")
         click_on("batman v superman ultimate edition")
       end
-      expect(current_path).to eq("/movies/281984")
+      expect(current_path).to eq(details_path)
     end
   end
 end

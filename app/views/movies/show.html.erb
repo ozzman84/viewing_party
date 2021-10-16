@@ -1,10 +1,14 @@
 <%= "#{@movie.name}" %>
 
+<div class='container' id='create-party'>
+  <%= button_to 'Create New Viewing Party', new_event_path %>
+</div>
+
 <div id="run-time">
   <h5>Run Time: </h5>
   <%= "#{@movie.run_time}" %>
 </div>
-
+''
 <div id="genres">
   <h5>Generes: </h5>
   <% @movie.genres.each do |genere| %>

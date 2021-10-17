@@ -6,8 +6,4 @@ class MoviesController < ApplicationController
       @movies = MoviesService.top_40_movies
     end
   end
-
-  def show
-    @movie = MoviesService.movie_details(params[:id])
-  end
 end

@@ -1,1 +1,12 @@
-<h1>Events#new</h1>
+<h1><%= "#{@movie.name} Viewing Party" %></h1>
+
+<div class='container' id='viewing-party-form'>
+  <%=  form_with model: @event, method: :post, local: true do |f| %>
+    <%= f.label :duration, 'Party Duration' %>
+    <%= f.number_field :duration, value: @movie.run_time %><br/>
+    <%= f.label :starttime, 'Start Time'%>
+    <%= f.datetime_select :starttime %><br/>
+    <%= f.hidden_field :title, value: @movie.name %><br/>
+    <%= f.submit 'Create a Party' %>
+  <% end %>
+</div>

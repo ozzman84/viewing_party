@@ -16,6 +16,12 @@
   <% end %>
 </div>
 
-<div class='test' id='viewing-party'>
+<div class='container' id='viewing-party'>
   <h1>Viewing Parties</h1>
+  <% binding.pry %>
+  <% @user.events.each do |event| %>
+    <%= event.title %>
+    <%= event.starttime %>
+    <%= event.duration %>
+  <% end %>
 </div>

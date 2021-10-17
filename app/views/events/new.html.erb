@@ -5,8 +5,16 @@
     <%= f.label :duration, 'Party Duration' %>
     <%= f.number_field :duration, value: @movie.run_time %><br/>
     <%= f.label :starttime, 'Start Time'%>
-    <%= f.datetime_select :starttime %><br/>
+    <%= f.datetime_select :starttime, ampm: true, prompt: true %><br/>
     <%= f.hidden_field :title, value: @movie.name %><br/>
+    <% @friends.each do |friend| %>
+      <%= f.fields_for :attendees do |form| %>
+        <div class="container" id="friend-<%= friend.id %>">
+          <%= form.label :user_id, friend.username%>
+          <%= form.check_box :user_id %><br/>
+        </div>
+      <% end %>
+    <% end %>
     <%= f.submit 'Create a Party' %>
   <% end %>
 </div>

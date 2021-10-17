@@ -17,6 +17,10 @@ RSpec.describe 'New Event Form', :vcr do
 
         stub_request(:get, "https://api.themoviedb.org/3/search/movie?api_key=#{ENV["movie_api_key"]}&query=batman").to_return(body: File.read(File.join('spec', 'fixtures', 'tmdb_search_batman.json')))
         @user1 = User.create!(email: "doggass420@butt.com", password: 'password', username: 'PresidentBush')
+        @user2 = User.create!(password: 'password', username: 'mike', email: 'mike@gmail.com')
+        @user3 = User.create!(password: 'doggie', username: 'blop', email: 'smoke@gmail.com')
+        @user1_friend = Friend.create!(user_id: @user1.id, friend_id: @user2.id)
+        @user1_friend2 = Friend.create!(user_id: @user1.id, friend_id: @user2.id)
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user1)
 
         visit movies_path
@@ -33,25 +37,30 @@ RSpec.describe 'New Event Form', :vcr do
 
         xit 'creates new event' do
           fill_in 'event[duration]', with: 1234
-          save_and_open_page
-          # fill_in 'event[starttime]', with: '2021-10-17T09:36'
-          select '2021', from: 'starttime[when(1i)]'
-          select 'December', from: 'date[when(2i)]'
-          select '13', from: 'date[when(3i)]'
-          select '05', from: 'date[when(4i)]'
-          select '23', from: 'date[when(5i)]'
+          select '2021', from: 'event_starttime_1i'
+          select 'December', from: 'event_starttime_2i'
+          select '13', from: 'event_starttime_3i'
+          select '05 AM', from: 'event_starttime_4i'
+          select '30', from: 'event_starttime_5i'
           click_on 'Create a Party'
 
           expect(page).to have_content('Party Created Successfully!')
           expect(current_path).to eq(dashboard_path)
         end
 
-        xit 'has checkboxes next to each friend indicating an invitation(if has friends)' do
-          fill_in 'Party duration', with: 1234
-          fill_in 'Start time', with: '2021-10-17T09:36'
+        it 'has checkboxes next to each friend indicating an invitation(if has friends)' do
+          fill_in 'event[duration]', with: 1234
+          select '2021', from: 'event_starttime_1i'
+          select 'December', from: 'event_starttime_2i'
+          select '13', from: 'event_starttime_3i'
+          select '05 AM', from: 'event_starttime_4i'
+          select '30', from: 'event_starttime_5i'
+          within("#friend-#{@user2.id}") do
+            check("event[attendees_attributes][0][user_id]")
+          end
           click_on 'Create a Party'
 
-          expect(page).to have_content('Date') #"2021-10-16 22:38:38.791048"
+          expect(current_path).to eq(dashboard_path) #"2021-10-16 22:38:38.791048"
           expect(page).to have_content('Party Created Successfully!') #"2021-10-16 22:38:38.791048"
         end
 

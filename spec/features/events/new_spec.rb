@@ -35,7 +35,7 @@ RSpec.describe 'New Event Form', :vcr do
           expect(current_path).to eq(new_event_path)
         end
 
-        xit 'creates new event' do
+        it 'creates new event' do
           fill_in 'event[duration]', with: 1234
           select '2021', from: 'event_starttime_1i'
           select 'December', from: 'event_starttime_2i'
@@ -61,18 +61,10 @@ RSpec.describe 'New Event Form', :vcr do
           click_on 'Create a Party'
 
           expect(current_path).to eq(dashboard_path) #"2021-10-16 22:38:38.791048"
-          expect(page).to have_content('Party Created Successfully!') #"2021-10-16 22:38:38.791048"
-        end
-
-        describe 'sad path' do
-          xit 'party not created if duration is shorter than run time' do
-            fill_in 'Party duration', with: 1
-            fill_in 'Date', with: '12/24'
-            fill_in 'Start time', with: '01:12 32'
-            click_on 'Create a Party'
-
-            expect(page).to have_content('Party not Created: Please re-enter information')
-          end
+          expect(page).to have_content('Party Created Successfully!')
+          expect(Attendee.all.length).to eq(1)
+          expect(Event.all.length).to eq(1)#"2021-10-16 22:38:38.791048"
+          #"2021-10-16 22:38:38.791048"
         end
       end
     end

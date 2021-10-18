@@ -1,22 +1,41 @@
-<h1>Users#show</h1>
-<div class='test' id='username'>
-  <h1><%= "Welcome #{current_user.username}" %></h1>
+<div class='container' id='username'>
+  <h1><%= "Welcome #{@user.username}" %></h1>
 </div>
 
-<div class='test' id='discover-movies'>
+<div class='container' id='discover-movies'>
   <h1><%= link_to 'Discover New Movies', movies_path %></h1>
 </div>
 
-<div class='test' id='friends'>
+<div class='container' id='friends'>
 
   <%= render "new_friend_form" %>
 
-  <h1>Friends</h1>
-  <% current_user.get_friends.each do |friend| %>
+  <h5>Friends</h5>
+  <% @user.get_friends.each do |friend| %>
     <%= friend.username %>
   <% end %>
 </div>
 
-<div class='test' id='viewing-party'>
-  <h1>Viewing Parties</h1>
-</div>
+
+  <section class="container" id="viewing-parties">
+    <div class="container" id="hosted-events">
+      <h5>Hosting</h5>
+      <% @user.events.each do |event| %>
+        <ul>
+          <%= event.title %>
+          <li> Start Time: <%= event.starttime %>
+          <li> Duration: <%= event.duration %>
+        </ul>
+      <% end %>
+    </div>
+    <div class="container" id="invited_events">
+      <h5>Invited</h5>
+      <% @user.invited_events.each do |event| %>
+        <ul>
+          <%= event.title %>
+          <li> Start Time: <%= event.starttime %>
+          <li> Duration: <%= event.duration %>
+        </ul>
+      <% end %>
+    </div>
+  </section>

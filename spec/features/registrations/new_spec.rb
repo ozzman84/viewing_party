@@ -1,4 +1,4 @@
-require 'rails_helper' 
+require 'rails_helper'
 
 RSpec.describe 'New Registration Page' do
   describe 'display' do
@@ -9,6 +9,7 @@ RSpec.describe 'New Registration Page' do
     it 'has area to create new user' do
       within("#new-user-form") do
         expect(page).to have_content("Email")
+
         fill_in "user[email]", with: "josh@dog.com"
         expect(page).to have_content("Username")
         fill_in "user[username]", with: "joshie"
@@ -19,7 +20,7 @@ RSpec.describe 'New Registration Page' do
 
         click_on("Sign Up")
       end
-      expect(current_path).to eq(root_path)
+      expect(current_path).to eq(dashboard_path)
     end
   end
 end

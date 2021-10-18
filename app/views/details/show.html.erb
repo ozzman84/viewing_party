@@ -2,7 +2,7 @@
 <%= "#{@movie.name}" %>
 
 <div class='container' id='create-party'>
-  <%= button_to 'Create A Viewing Party', new_event_path(id: @movie.id), method: :get %>
+  <%= button_to 'Create A Viewing Party', new_event_path(id: @movie.id), method: :get, params: { movie_id: @movie.id }, local: true %>
 </div>
 
 <div id="run-time">
@@ -13,7 +13,7 @@
 <div id="genres">
   <h5>Generes: </h5>
   <% @movie.genres.each do |genere| %>
-  <%= "#{genere[:name]}" %><br/>
+    <%= "#{genere[:name]}" %><br/>
   <% end %>
 </div>
 
@@ -28,7 +28,6 @@
     <p><%= member.name %> As <%= member.role %></p>
   <% end %>
 </div>
-
 
 <div id="reviews">
   <h5>Reviews: </h5>

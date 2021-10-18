@@ -13,7 +13,7 @@ class FriendsController < ApplicationController
     else
       flash[:alert] = 'Not a valid email'
     end
-    redirect_to dashboard_index_path
+    redirect_to dashboard_path
   end
 
   private

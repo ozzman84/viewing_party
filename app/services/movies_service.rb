@@ -25,7 +25,8 @@ class MoviesService < ApiService
 
     def movie_list_maker(param)
       param[:results].map do |movie|
-        name = movie[:title].nil? ? movie[:name] : movie[:title]
+        # binding.pry
+        name = movie[:title].nil? ? movie[:name] : movie[:original_title]
         MovieListItem.new(movie[:id], name, movie[:vote_count])
       end
     end
@@ -44,5 +45,4 @@ class MoviesService < ApiService
       }
     end
   end
-
 end

@@ -6,4 +6,25 @@ RSpec.describe User, type: :model do
     it { should have_many(:events) }
   end
 
+  describe 'instance methods' do
+    describe 'events_by_time' do
+      before :each do
+        @user1 = User.create!(password: 'test', username: 'johhy', email: 'johhny@gmail.com')
+        @user2 = User.create!(password: 'password', username: 'mike', email: 'mike@gmail.com')
+        @user3 = User.create!(password: 'doggie', username: 'blop', email: 'smoke@gmail.com')
+        @user1_friend = Friend.create!(user_id: @user1.id, friend_id: @user2.id)
+
+        @event1 = @user1.events.create!(duration: 1234, starttime: "2018-05-08 08:08:00", title: "Dogman")
+        @attendee1 = @event1.attendees.create!(user_id: @user2.id)
+
+        @event2 = @user2.events.create!(duration: 430, starttime: "2024-09-05 05:07:00", title: "Shap")
+        @attendee2 = @event2.attendees.create!(user_id: @user1.id)
+      end
+
+      it 'can return events that the user is invited to' do
+        expect(@user1.invited_events.first.title).to eq("Shap")
+      end
+    end
+  end
+
 end

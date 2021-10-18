@@ -63,7 +63,7 @@ RSpec.describe 'New Event Form', :vcr do
           expect(current_path).to eq(dashboard_path) #"2021-10-16 22:38:38.791048"
           expect(page).to have_content('Party Created Successfully!')
           expect(Attendee.all.length).to eq(1)
-          expect(Event.all.length).to eq(1)#"2021-10-16 22:38:38.791048"
+          expect(Event.all.length).to eq(5)#"2021-10-16 22:38:38.791048"
           #"2021-10-16 22:38:38.791048"
         end
       end

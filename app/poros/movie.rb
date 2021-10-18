@@ -16,17 +16,17 @@ class Movie
     @run_time = params[:runtime]
     @genres = params[:genres]
     @summary = params[:overview]
-    @cast = params[:cast]
-    @reviews = params[:reviews]
+    @cast = params[:cast] #create_cast
+    @reviews = params[:reviews] #create_reviews
   end
 
-  def create_cast
+  def create_cast #remove create
     @cast.map do |member|
       CastMember.new(member[:name], member[:character])
     end
   end
 
-  def create_reviews
+  def create_reviews #remove create
     @reviews.map do |review|
       Review.new(review[:author], review[:content])
     end

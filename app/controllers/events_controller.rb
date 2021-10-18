@@ -8,7 +8,7 @@ class EventsController < ApplicationController
 
   def create
     event = Event.create(event_params.merge({user_id: current_user.id}))
-    if event.present?
+    if event.valid?
       redirect_to dashboard_path, success: 'Party Created Successfully!'
     else
       redirect_to new_event_path, alert: 'Party not Created: Please re-enter information'

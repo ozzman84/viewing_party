@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe 'Movies Index Page' do
-  describe 'display' do
+RSpec.describe 'Movies Index' do
+  describe 'As an authenticated user' do
     before :each do
       stub_request(:get, "https://api.themoviedb.org/3/discover/movie?api_key=#{ENV["movie_api_key"]}&sort_by=vote_count.desc").to_return(body: File.read(File.join('spec', 'fixtures', 'tmdb_discover_movies_by_vote_count_page1.json')))
       stub_request(:get, "https://api.themoviedb.org/3/discover/movie?sort_by=vote_count.desc&page=2&api_key=#{ENV["movie_api_key"]}").to_return(body: File.read(File.join('spec', 'fixtures', 'tmdb_discover_movies_by_vote_count_page2.json')))
@@ -16,46 +16,59 @@ RSpec.describe 'Movies Index Page' do
 
       stub_request(:get, "https://api.themoviedb.org/3/search/movie?api_key=#{ENV["movie_api_key"]}&query=batman").to_return(body: File.read(File.join('spec', 'fixtures', 'tmdb_search_batman.json')))
 
-      user1 = User.create!(email: "doggass420@butt.com", password: 'password', username: 'PresidentBush')
-      visit(root_path)
-      within("#sign-in") do
-        fill_in 'email', with: "doggass420@butt.com"
-        fill_in 'password', with: 'password'
-        click_on "Log In"
-      end
-      click_on 'Discover New Movies'
+      @user1 = User.create!(email: "doggass420@butt.com", password: 'password', username: 'PresidentBush')
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user1)
+      visit movies_path
     end
 
-    it 'can display a link to Top 40 Movies' do
-      expect(current_path).to eq("/movies")
-      within("#movies-home") do
-        expect(page).to have_link("Top 40 Movies")
-        click_on 'Top 40 Movies'
+    describe 'Discover new movies view' do
+      describe 'Top 40 Movies' do
+        it 'has current path new movies' do
+          expect(current_path).to eq(movies_path)
+        end
 
-        expect(page).to have_content("Top 40 Movies")
-        expect(page).to have_link("Inception")
+        it 'has a link to Top 40 Movies' do
+          expect(page).to have_link("Top 40 Movies")
+          expect(current_path).to eq(movies_path)
+        end
+
+        # it 'Each movie has a title, link, and vote count' do     ----> Can this work if setup correctly?
+        #   @movies.each do |movie|
+        #     expect(page).to have_link(movie.name)
+        #     expect(page).to have_link(movie.count)
+        #   end
+        # end
+
+        it 'Movie link is to movie detail path' do
+          click_on "Inception"
+          expect(current_path).to eq(details_path)
+        end
       end
-      within("#top-movie-27205") do
 
-        click_on("Inception")
+      describe 'Search Movie names by keyword' do
+        context 'With valid parameters' do
+          it 'Returns search results with movie detail link' do
+            expect(current_path).to eq(movies_path)
+
+            fill_in 'query', with: 'batman'
+            click_on "Search"
+
+            expect(page).to have_link("batman v superman ultimate edition")
+            click_on "batman v superman ultimate edition"
+
+            expect(current_path).to eq(details_path)
+          end
+        end
+
+        # context 'with invalid parameters' do
+        #   it 'Returns no results message' do
+        #     fill_in 'query', with: '%'
+        #     click_on("Search")
+        #
+        #     expect(page).to have_content('No movies match your search.')
+        #   end
+        # end
       end
-
-      expect(current_path).to eq(details_path)
-    end
-
-    it 'can display search for movies by keyword' do
-      expect(current_path).to eq("/movies")
-
-      within("#movies-home") do
-        fill_in 'query', with: 'batman'
-        click_on("Search")
-      end
-      expect(current_path).to eq(movies_path)
-      within("#movie-search-item-281984") do
-        expect(page).to have_link("batman v superman ultimate edition")
-        click_on("batman v superman ultimate edition")
-      end
-      expect(current_path).to eq(details_path)
     end
   end
 end

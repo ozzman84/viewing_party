@@ -7,12 +7,12 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: /\A[^@\s]+@[^@\s]+\z/, message: 'Invalid email' }
 
   def get_friends
-    User.where('users.id IN (?)', friends.pluck(:friend_id))
+    User.where(users: { id: friends.pluck(:friend_id) })
   end
 
   def invited_events
     Event.joins(:attendees)
-    .where("attendees.user_id = ?", id)
-    .order(:starttime)
+         .where(attendees: { user_id: id })
+         .order(:starttime)
   end
 end

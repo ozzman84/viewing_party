@@ -17,6 +17,8 @@ gem 'bootsnap'
 gem 'jbuilder', '~> 2.5'
 gem 'bcrypt'
 gem "figaro"
+gem 'bootstrap', '~> 5.1.0'
+gem 'jquery-rails'
 
 group :development, :test do
   gem 'pry'

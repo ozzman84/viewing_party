@@ -1,4 +1,4 @@
-require 'rails_helper' 
+require 'rails_helper'
 
 RSpec.describe 'Welcome Show Page' do
   describe 'displays' do
@@ -44,5 +44,4 @@ RSpec.describe 'Welcome Show Page' do
       expect(current_path).to eq(root_path)
     end
   end
-
 end

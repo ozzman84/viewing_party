@@ -24,6 +24,7 @@ RSpec.describe 'New Event Form', :vcr do
 
       visit movies_path
 
+      click_on "Top 40 Movies"
       click_on "Inception"
       click_on 'Create A Viewing Party'
     end

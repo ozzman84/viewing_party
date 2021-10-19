@@ -1,41 +1,68 @@
-<div class='container' id='username'>
+<div id='username'>
   <h1><%= "Welcome #{@user.username}" %></h1>
-</div>
-
-<div class='container' id='discover-movies'>
-  <h1><%= link_to 'Discover New Movies', movies_path %></h1>
 </div>
 
 <div class='container' id='friends'>
 
   <%= render "new_friend_form" %>
+<br>
 
-  <h5>Friends</h5>
-  <% @user.get_friends.each do |friend| %>
-    <%= friend.username %>
-  <% end %>
 </div>
 
-
-  <section class="container" id="viewing-parties">
-    <div class="container" id="hosted-events">
-      <h5>Hosting</h5>
-      <% @user.events.each do |event| %>
-        <ul>
-          <%= event.title %>
-          <li> Start Time: <%= event.starttime %>
-          <li> Duration: <%= event.duration %>
-        </ul>
-      <% end %>
-    </div>
-    <div class="container" id="invited_events">
-      <h5>Invited</h5>
-      <% @user.invited_events.each do |event| %>
-        <ul>
-          <%= event.title %>
-          <li> Start Time: <%= event.starttime %>
-          <li> Duration: <%= event.duration %>
-        </ul>
-      <% end %>
+  <section id="viewing-parties">
+    <div class="container px-0">
+      <div class="row gx-5">
+        <div class="col">
+         <div class="p-3 border bg-secondary" id="hosted-events"><h3>Current Friends</h3>
+           <br>
+           <table class="table table-striped table-sm" id="enabled-items">
+            <tbody>
+              <% @user.get_friends.each do |friend| %>
+                <tr id="Top-<%= 'Friends Names' %>">
+                  <td><%= friend.username %></td>
+                </tr>
+              <% end %>
+            </tbody>
+            </table>
+          </div>
+        </div>
+       <div class="col">
+        <div class="p-3 border bg-secondary"><h3>Hosted Events</h3>
+          <br>
+          <div class="container" id="hosted-events">
+            <% @user.events.each do |event| %>
+              <div class="card" style="width: 18rem;">
+                <div class="card-header">
+                  <%= event.title %>
+                </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Start Time: <%= event.starttime %></li>
+                    <li class="list-group-item">Event Duration: <%= event.duration %></li>
+                  </ul>
+              </div><br/>
+            <% end %>
+          </div>
+        </div>
+      </div>
+        <div class="col">
+          <div class="p-3 border bg-secondary"><h3>Invited Events</h3>
+            <br>
+            <div class="container" id="invited_events">
+              <ul class="list-group list-group-flush">
+              <% @user.invited_events.each do |event| %>
+                <div class="card" style="width: 18rem;">
+                  <div class="card-header">
+                    <%= event.title %>
+                  </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item"> Start Time: <%= event.starttime %></li>
+                      <li class="list-group-item"> Duration: <%= event.duration %></li>
+                    </ul>
+                </div><br/>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>

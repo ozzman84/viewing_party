@@ -29,4 +29,8 @@ footer {
   align-self: baseline;
   flex-direction: row;
 }
+.ml-auto .dropdown-menu {
+    left: auto !important;
+    right: 0px;
+}
 @import "bootstrap";

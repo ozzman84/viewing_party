@@ -1,15 +1,38 @@
-<h1>Welcome Friend</h1>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
 
-<div class='container' id="sign-in">
-    <%= form_with url: sign_in_path, local: true do |f| %>
-        <%= f.label :email %><br/>
-        <%= f.text_field :email %><br/>
-        <%= f.label :password %><br/>
-        <%= f.password_field :password %><br/><br/>
-        <%= f.submit "Log In" %>
-    <% end %>
-</div>
+    <title>Signin Template for Bootstrap</title>
 
-<div class='container'>
-  <%= link_to "Sign Up", sign_up_path %>
-</div>
+    <!-- Bootstrap core CSS -->
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="signin.css" rel="stylesheet">
+  </head>
+
+  <body class="text-center">
+    <form class="form-signin" id='sign-in'>
+      <!-- <img class="mb-4" src="../../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"> -->
+      <h1 class="h3 mb-3 font-weight-normal" >Please sign in</h1>
+      <%= form_with url: sign_in_path, local: true do |f| %>
+      <label for="inputEmail" class="sr-only"><%= f.label :email %></label><br/>
+      <%= f.text_field :email %><br/><br/>
+      <label for="inputPassword" class="sr-only"><%= f.label :password %></label><br/>
+      <%= f.password_field :password %><br/><br/>
+      <div class='container'>
+        <label>
+          <%= link_to "Sign Up", sign_up_path %><br/><br/>
+        </label>
+      </div>
+      <%= f.submit "Log In" %><br/><br/>
+      <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+      <% end %>
+    </form>
+  </body>
+</html>

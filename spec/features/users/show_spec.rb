@@ -63,7 +63,7 @@ RSpec.describe 'User Show Dashboard' do
     describe 'User Show Viewing Parties' do
       context 'Hosing section' do
         it 'has title hosting' do
-          expect(page).to have_content('Hosting')
+          expect(page).to have_content('Hosted Events')
         end
 
         it 'has hosted events with attributes' do

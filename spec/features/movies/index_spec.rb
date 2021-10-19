@@ -31,14 +31,10 @@ RSpec.describe 'Movies Index Page' do
       within("#movies-home") do
         expect(page).to have_link("Top 40 Movies")
         click_on 'Top 40 Movies'
-
         expect(page).to have_content("Top 40 Movies")
+      end
         expect(page).to have_link("Inception")
-      end
-      within("#top-movie-27205") do
-
         click_on("Inception")
-      end
 
       expect(current_path).to eq(details_path)
     end
@@ -51,10 +47,8 @@ RSpec.describe 'Movies Index Page' do
         click_on("Search")
       end
       expect(current_path).to eq(movies_path)
-      within("#movie-search-item-281984") do
-        expect(page).to have_link("batman v superman ultimate edition")
-        click_on("batman v superman ultimate edition")
-      end
+      expect(page).to have_link("batman v superman ultimate edition")
+      click_on("batman v superman ultimate edition")
       expect(current_path).to eq(details_path)
     end
   end

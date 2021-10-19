@@ -1,14 +1,11 @@
 class FriendsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
-  def new
-    @friend = Friend.new
-  end
+  def new; end
 
   def create
-    friend_user = User.find_by email: params[:friend]
-    friend = Friend.new(user_id: session[:user_id], friend_id: friend_user.id)
-    if friend.save
+    if friend_user = User.find_by(email: params[:friend])
+      friend = Friend.create(user_id: session[:user_id], friend_id: friend_user.id)
       flash[:notice] = "Added #{friend_user.username} as a friend"
     else
       flash[:alert] = 'Not a valid email'

@@ -1,9 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  describe 'Relationships' do
+    it { should have_many(:events).dependent :destroy }
+    it { should have_many(:friends) }
+  end
 
-  describe "relationships" do
-    it { should have_many(:events) }
+  describe 'Validations' do
+    it { should validate_presence_of(:email) }
   end
 
   describe 'instance methods' do
@@ -24,7 +28,10 @@ RSpec.describe User, type: :model do
       it 'can return events that the user is invited to' do
         expect(@user1.invited_events.first.title).to eq("Shap")
       end
+
+      it 'returns Users Friends ID\'s' do
+        expect(@user1.get_friends).to eq([@user2])
+      end
     end
   end
-
 end

@@ -1,47 +1,31 @@
-class MoviesService < ApiService
+class MoviesService
   class << self
-    def top_40_movies
-      uri = '/3/discover/movie?sort_by=vote_count.desc'
-      page1 = MovieClient.fetch(uri)
-      page2 = MovieClient.fetch("#{uri}&page=2")
-      movie_list_maker(page1) + movie_list_maker(page2)
-    end
-
-    def movies_by_name(search_string)
-      page1 = MovieClient.fetch("/3/search/movie?query=#{search_string}")
-      if page1[:total_pages] > 1
-        page2 = MovieClient.fetch("/3/search/movie?query=#{search_string}&page=2")
-        movie_list_maker(page1) + movie_list_maker(page2)
-      else
-        movie_list_maker(page1)
+    def top_40_movies(page = nil)
+      uri = "/3/discover/movie?sort_by=vote_count.desc"
+      if !page.nil? # Ternary
+        page_num = "&page=#{page}"
+        uri += page_num
       end
+      MovieClient.fetch(uri)
     end
 
-    def movie_details(movie_id)
-      Movie.new(movie_maker(movie_id))
-    end
-
-    private
-
-    def movie_list_maker(param)
-      param[:results].map do |movie|
-        name = movie[:title].nil? ? movie[:name] : movie[:original_title]
-        MovieListItem.new(movie[:id], name, movie[:vote_count])
+    def movies_by_name(search_string, page = nil)
+      if !page.nil?
+        search_string = search_string + "&page=" + page.to_s
       end
+      MovieClient.fetch("/3/search/movie?query=#{search_string}")
     end
 
-    def movie_maker(movie_id)
+    def movie(movie_id)
       movie_details = MovieClient.fetch("/3/movie/#{movie_id}?")
-      movie_details.merge(cast_and_reviews(movie_id))
     end
 
-    def cast_and_reviews(movie_id)
-      cast = MovieClient.fetch("/3/movie/#{movie_id}/credits?")
-      reviews = MovieClient.fetch("/3/movie/#{movie_id}/reviews?")
-      {
-        cast: cast[:cast],
-        reviews: reviews[:results]
-      }
+    def cast(movie_id)
+      MovieClient.fetch("/3/movie/#{movie_id}/credits?")
+    end
+
+    def reviews(movie_id)
+      MovieClient.fetch("/3/movie/#{movie_id}/reviews?")
     end
   end
 end

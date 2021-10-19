@@ -29,17 +29,12 @@ RSpec.describe 'Movies Index' do
 
         it 'has a link to Top 40 Movies' do
           expect(page).to have_link("Top 40 Movies")
+          click_on 'Top 40 Movies'
           expect(current_path).to eq(movies_path)
         end
 
-        # it 'Each movie has a title, link, and vote count' do     ----> Can this work if setup correctly?
-        #   @movies.each do |movie|
-        #     expect(page).to have_link(movie.name)
-        #     expect(page).to have_link(movie.count)
-        #   end
-        # end
-
         it 'Movie link is to movie detail path' do
+          click_on 'Top 40 Movies'
           click_on "Inception"
           expect(current_path).to eq(details_path)
         end

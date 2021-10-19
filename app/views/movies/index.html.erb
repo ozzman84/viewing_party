@@ -1,19 +1,26 @@
 <section id="movies-home">
-  <%= link_to "Top 40 Movies", movies_path, search: "top_40" %>
+  <%= link_to "Top 40 Movies", search: 'top_40'%>
 
   <%= form_with url: movies_path, method: :get, local: true do |form| %>
     <%= form.label :query %>
     <%= form.text_field :query %>
-
     <%= form.submit "Search" %>
   <% end %>
 
   <% if params[:query] %>
-    <%= render "search_movies" %>
+    <h3>Search Movies</h3>
   <% end %>
 
-  <% if params[:search] == 'top_40' %>
-    <%= render 'top_40' %>
+  <% if params[:search] == "top_40" %>
+    <h3>Top 40 Movies</h3>
+  <% end %>
+
+  <% if !@movies.nil? %>
+    <% @movies.each do |movie| %>
+      <div id="movie-search-item-<%= movie.id %>">
+        <li><%= link_to "#{movie.name}", details_path(id: movie.id) %>  Vote Count: <%= movie.vote_count %></li>
+      </div>
+    <% end %>
   <% end %>
 
 </section>

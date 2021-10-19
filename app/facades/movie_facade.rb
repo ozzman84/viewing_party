@@ -1,0 +1,41 @@
+require './app/services/movies_service'
+
+class MovieFacade
+  class << self
+    def top40(page_num = nil)
+      data1 = MoviesService.top_40_movies
+      data2 = MoviesService.top_40_movies(2)
+
+      movie_list(data1) + movie_list(data2)
+    end
+
+    def movies_query(search_string)
+      data1 = MoviesService.movies_by_name(search_string)
+      if data1[:total_pages] > 1
+        data2 = MoviesService.movies_by_name(search_string, 2)
+        movie_list(data1) + movie_list(data2)
+      else
+        movie_list(data1)
+      end
+    end
+
+    def movie_details(movie_id)
+      movie = MoviesService.movie(movie_id)
+      cast = MoviesService.cast(movie_id)
+      reviews = MoviesService.reviews(movie_id)
+
+      details = movie.merge(cast, reviews)
+
+      Movie.new(details)
+    end
+
+    private
+
+    def movie_list(param)
+      param[:results].map do |movie|
+        name = movie[:title].nil? ? movie[:name] : movie[:original_title]
+        MovieListItem.new(movie[:id], name, movie[:vote_count])
+      end
+    end
+  end
+end

@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   def new
     @event = Event.new
-    @movie = MoviesService.movie_details(params[:movie_id])
+    @movie = MovieFacade.movie_details(params[:movie_id])
     @friends = current_user.get_friends
     @event.attendees.build
   end

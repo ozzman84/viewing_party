@@ -1,0 +1,15 @@
+current directory: /Users/ryanteske/turing/3module/projects/viewing_party/vendor/bundle/ruby/2.7.0/gems/bindex-0.8.1/ext/skiptrace
+/Users/ryanteske/.rbenv/versions/2.7.2/bin/ruby -I /Users/ryanteske/.rbenv/versions/2.7.2/lib/ruby/2.7.0 -r ./siteconf20211019-34644-1m9tyl0.rb extconf.rb
+creating Makefile
+
+current directory: /Users/ryanteske/turing/3module/projects/viewing_party/vendor/bundle/ruby/2.7.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR=" clean
+
+current directory: /Users/ryanteske/turing/3module/projects/viewing_party/vendor/bundle/ruby/2.7.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR="
+compiling cruby.c
+linking shared-object skiptrace/internal/cruby.bundle
+
+current directory: /Users/ryanteske/turing/3module/projects/viewing_party/vendor/bundle/ruby/2.7.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 cruby.bundle ./.gem.20211019-34644-1hu1n9o/skiptrace/internal

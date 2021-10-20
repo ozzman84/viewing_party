@@ -21,19 +21,23 @@ RSpec.describe 'New Event Form', :vcr do
       @user1_friend = Friend.create!(user_id: @user1.id, friend_id: @user2.id)
       @user1_friend2 = Friend.create!(user_id: @user1.id, friend_id: @user2.id)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user1)
+      allow_any_instance_of(ApplicationController).to receive(:user_present?).and_return(@user1)
+
       @date = DateTime.now + 6.days
-
       visit movies_path
-
-      click_on "Top 40 Movies"
+      within("#movies-home") do
+        click_on "Top 40 Movies"
+      end
       click_on "Inception"
       click_on 'Create A Viewing Party'
+
     end
 
     describe 'New viewing party view' do
       it 'Has Movie title above form' do
         expect(page).to have_content('Inception')
         expect(current_path).to eq(new_event_path)
+
       end
 
       describe 'Select Create New Event' do

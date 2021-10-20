@@ -8,19 +8,21 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="/dashboard">Viewing Party<span class="sr-only"></span></a>
+        <% if !current_user.nil? %>
+          <a class="nav-link" href="/dashboard">Viewing Party<span class="sr-only"></span></a>
+        <% end %>
       </li>
       <li class="nav-item active" id='discover-movies'>
-        <a class="nav-link" <%= link_to 'Discover New Movies', movies_path %><span class="sr-only"></span></a>
+        <% if !current_user.nil? %>
+          <a class="nav-link" <%= link_to 'Discover New Movies', movies_path %><span class="sr-only"></span></a>
+        <% end %>
       </li>
-      <!-- <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success btn-light" type="submit">Search</button>
-      </form> -->
     </ul>
     <ul class="navbar-nav justify-content-right-end">
-        <li class="nav-item">
-        <a class="nav-link" href=#>Log Off</a>
+      <li class="nav-item">
+        <% if !current_user.nil? %>
+          <a class="nav-link" <%= link_to "Log Out", sign_out_path, remote: true %><span class="sr-only"></span></a>
+        <% end %>
       </li>
     </ul>
   </div>

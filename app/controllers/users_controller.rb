@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  skip_before_action :user_present?, except: :show
+
   def show
     @user = User.find(current_user.id)
   end

@@ -18,6 +18,8 @@ RSpec.describe 'Movies Index' do
 
       @user1 = User.create!(email: "doggass420@butt.com", password: 'password', username: 'PresidentBush')
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user1)
+      allow_any_instance_of(ApplicationController).to receive(:user_present?).and_return(@user1)
+
       visit movies_path
     end
 

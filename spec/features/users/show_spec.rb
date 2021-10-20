@@ -9,10 +9,10 @@ RSpec.describe 'User Show Dashboard' do
       @user3 = User.create!(password: 'doggie', username: 'blop', email: 'smoke@gmail.com')
       @user1_friend = Friend.create!(user_id: @user1.id, friend_id: @user2.id)
 
-      @event1 = @user1.events.create!(duration: 1234, starttime: "2018-05-08 08:08:00", title: "Dogman")
+      @event1 = @user1.events.create!(duration: 1234, starttime: DateTime.now + 5.days, title: "Dogman")
       @attendee1 = @event1.attendees.create!(user_id: @user2.id)
 
-      @event2 = @user2.events.create!(duration: 430, starttime: "2024-09-05 05:07:00", title: "Shap")
+      @event2 = @user2.events.create!(duration: 430, starttime: DateTime.now + 5.days, title: "Shap")
       @attendee2 = @event2.attendees.create!(user_id: @user1.id)
 
       visit root_path
@@ -45,7 +45,7 @@ RSpec.describe 'User Show Dashboard' do
           click_on "Make Friend"
 
           expect(page).to have_content(@user3.username)
-          expect(page).to have_content("Added #{@user3.username} as a friend")
+          expect(page).to have_content("Did we just become best friends? #{@user3.username} is now a friend!")
         end
       end
 
@@ -55,7 +55,7 @@ RSpec.describe 'User Show Dashboard' do
           click_on 'Make Friend'
 
           expect(page).to have_no_content(@user3.username)
-          expect(page).to have_content('Not a valid email')
+          expect(page).to have_content("Don’t you put that evil on me, #{@user1.username}! Please try another email address.")
         end
       end
     end

@@ -8,6 +8,7 @@ RSpec.describe User, type: :model do
 
   describe 'Validations' do
     it { should validate_presence_of(:email) }
+    it { should validate_presence_of(:username) }
   end
 
   describe 'instance methods' do
@@ -18,10 +19,10 @@ RSpec.describe User, type: :model do
         @user3 = User.create!(password: 'doggie', username: 'blop', email: 'smoke@gmail.com')
         @user1_friend = Friend.create!(user_id: @user1.id, friend_id: @user2.id)
 
-        @event1 = @user1.events.create!(duration: 1234, starttime: "2018-05-08 08:08:00", title: "Dogman")
+        @event1 = @user1.events.create!(duration: 1234, starttime: DateTime.now + 5.days, title: "Dogman")
         @attendee1 = @event1.attendees.create!(user_id: @user2.id)
 
-        @event2 = @user2.events.create!(duration: 430, starttime: "2024-09-05 05:07:00", title: "Shap")
+        @event2 = @user2.events.create!(duration: 430, starttime: DateTime.now + 4.days, title: "Shap")
         @attendee2 = @event2.attendees.create!(user_id: @user1.id)
       end
 
@@ -29,7 +30,7 @@ RSpec.describe User, type: :model do
         expect(@user1.invited_events.first.title).to eq("Shap")
       end
 
-      it 'returns Users Friends ID\'s' do
+      it 'returns Users Friends' do
         expect(@user1.get_friends).to eq([@user2])
       end
     end

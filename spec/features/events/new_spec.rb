@@ -73,8 +73,9 @@ RSpec.describe 'New Event Form', :vcr do
             # stub_request(:get, "https://api.themoviedb.org/3/movie/?api_key=da336b32ae4779ba9aa007085c1574ec")
             select '2017', from: 'event_starttime_1i'
             click_on 'Create a Party'
-
-            expect(page).to have_content("That's a bold move #{@user1.username}, let's see if it pays off. Party not Created: Please re-enter information")
+            within("#flashes") do
+              expect(page).to have_content("It must be some kind of hot tub time machine... Date must be in the future!")
+            end
           end
         end
       end

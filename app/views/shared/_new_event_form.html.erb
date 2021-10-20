@@ -1,0 +1,20 @@
+<section class="container">
+  <h1><%= "#{@movie.name} Viewing Party" %></h1>
+  <%=  form_with model: @event, method: :post, local: true do |f| %>
+    <%= f.label :duration, 'Party Duration' %>
+    <%= f.number_field :duration, within: @movie.run_time.to_i...1000, value: @movie.run_time, step: 20 %><br/>
+    <%= f.label :starttime, 'Start Time'%>
+    <%= f.datetime_select :starttime, ampm: true, default: DateTime.now %><br/>
+    <%= f.hidden_field :movie_id, value: @movie.id %><br/>
+    <%= f.hidden_field :title, value: @movie.name %><br/>
+    <% @friends.each do |friend| %>
+      <%= f.fields_for :attendees do |form| %>
+        <div class="container" id="friend-<%= friend.id %>">
+          <%= form.label :user_id, friend.username%>
+          <%= form.check_box :user_id, {}, friend.id, 'not invited' %><br/>
+        </div>
+      <% end %>
+    <% end %>
+    <%= f.submit 'Create a Party' %>
+  <% end %>
+</section>

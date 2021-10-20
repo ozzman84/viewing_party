@@ -11,9 +11,9 @@ class UsersController < ApplicationController
     user = User.new(user_params)
     if user.save
       session[:user_id] = user.id
-      redirect_to dashboard_path, success: 'Account Created'
+      redirect_to dashboard_path, success: "Welcome to the Thunder Dome #{current_user.username}! Account created."
     else
-      redirect_to new_user_path, alert: 'Account Not Created'
+      redirect_to new_user_path, alert: 'They\'ve done studies ya know, 60% of the time it works everytime. Account not created.'
     end
   end
 

@@ -51,18 +51,16 @@ RSpec.describe 'Movies Index' do
             click_on "Search"
 
             expect(page).to have_link("batman v superman ultimate edition")
-            click_on "batman v superman ultimate edition"
-
-            expect(current_path).to eq(details_path)
           end
         end
 
         context 'with invalid parameters' do
           it 'Returns no results message' do
-            fill_in 'query', with: '%'
+            fill_in 'query', with: ''
             click_on("Search")
-
-            expect(page).to have_content('One time, she punched me in the face. Invalid Search')
+            within("#flashes") do
+              expect(page).to have_content('One time, she punched me in the face. It was awesome. Invalid Search')
+            end
           end
         end
       end

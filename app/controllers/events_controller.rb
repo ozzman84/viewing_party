@@ -20,7 +20,8 @@ class EventsController < ApplicationController
       flash[:notice] = @event.errors.messages[:starttime]
       @event.attendees.destroy_all
       @event.attendees.build
-      render(partial: 'shared/new_event_form', layout: 'layouts/application', locals: { event: @event, movie: @movie, friends: @friends })
+      render(partial: 'shared/new_event_form', layout: 'layouts/application',
+             locals: { event: @event, movie: @movie, friends: @friends })
     end
   end
 

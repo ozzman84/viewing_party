@@ -24,14 +24,23 @@ RSpec.describe User, type: :model do
 
         @event2 = @user2.events.create!(duration: 430, starttime: DateTime.now + 4.days, title: "Shap")
         @attendee2 = @event2.attendees.create!(user_id: @user1.id)
+
+        @event3 = @user2.events.create!(duration: 430, starttime: DateTime.now + 2.days, title: "Shap")
+        @attendee2 = @event3.attendees.create!(user_id: @user1.id)
       end
 
       it 'can return events that the user is invited to' do
         expect(@user1.invited_events.first.title).to eq("Shap")
+        expect(@user2.invited_events.first.title).to eq("Dogman")
+      end
+
+      it 'can return events that the user is hosting' do
+        expect(@user1.hosted_events.first.title).to eq("Dogman")
+        expect(@user2.hosted_events.first.title).to eq("Shap")
       end
 
       it 'returns Users Friends' do
-        expect(@user1.get_friends).to eq([@user2])
+        expect(@user1.friend_users).to eq([@user2])
       end
     end
   end

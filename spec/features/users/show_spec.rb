@@ -36,6 +36,12 @@ RSpec.describe 'User Show Dashboard' do
         expect(page).to have_content('Friends')
         expect(page).to have_content(@user2.username)
       end
+
+      it 'has a button to logout' do
+        expect(page).to have_link('Log Out')
+        click_on('Log Out')
+        expect(current_path).to eq(root_path)
+      end
     end
 
     describe 'adding friends' do

@@ -1,8 +1,8 @@
 class MoviesService
   class << self
     def top_40_movies(page = nil)
-      uri = "/3/discover/movie?sort_by=vote_count.desc"
-      if !page.nil? # Ternary
+      uri = '/3/discover/movie?sort_by=vote_count.desc'
+      unless page.nil? # Ternary
         page_num = "&page=#{page}"
         uri += page_num
       end
@@ -10,9 +10,7 @@ class MoviesService
     end
 
     def movies_by_name(search_string, page = nil)
-      if !page.nil?
-        search_string = search_string + "&page=" + page.to_s
-      end
+      search_string = search_string + '&page=' + page.to_s unless page.nil?
       MovieClient.fetch("/3/search/movie?query=#{search_string}")
     end
 

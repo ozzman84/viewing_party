@@ -2,7 +2,7 @@ require './app/services/movies_service'
 
 class MovieFacade
   class << self
-    def top40(page_num = nil)
+    def top40(_page_num = nil)
       data1 = MoviesService.top_40_movies
       data2 = MoviesService.top_40_movies(2)
 
@@ -24,7 +24,14 @@ class MovieFacade
       cast = MoviesService.cast(movie_id)
       reviews = MoviesService.reviews(movie_id)
 
-      details = movie.merge(cast, reviews)
+      collection = []
+      10.times do |x|
+        collection << cast[:cast][x]
+      end
+
+      details = movie.merge({ cast: collection })
+
+      details[:reviews] = (reviews if reviews[:total_results].positive?)
 
       Movie.new(details)
     end

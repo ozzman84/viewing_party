@@ -15,7 +15,8 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       redirect_to dashboard_path, success: "Welcome to the Thunder Dome #{current_user.username}! Account created."
     else
-      redirect_to new_user_path, alert: 'They\'ve done studies ya know, 60% of the time it works everytime. Account not created.'
+      redirect_to sign_up_path,
+                  alert: 'They\'ve done studies ya know, 60% of the time it works everytime. Account not created.'
     end
   end
 

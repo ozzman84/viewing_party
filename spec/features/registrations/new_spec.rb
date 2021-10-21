@@ -22,5 +22,20 @@ RSpec.describe 'New Registration Page' do
       end
       expect(current_path).to eq(dashboard_path)
     end
+
+    it 'has area to create new user' do
+      within("#new-user-form") do
+        expect(page).to have_content("Email")
+
+        fill_in "user[email]", with: "joshdog.com"
+        fill_in "user[username]", with: ""
+        fill_in "user[password]", with: ""
+        fill_in "user[password_confirmation]", with: "dogman"
+
+        click_on("Sign Up")
+      end
+      expect(current_path).to eq(sign_up_path)
+      expect(page).to have_content('They\'ve done studies ya know, 60% of the time it works everytime. Account not created.')
+    end
   end
 end

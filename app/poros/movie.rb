@@ -36,7 +36,7 @@ class Movie
     if reviews.nil?
       'No Reviews Recorded'
     else
-      reviews.map do |review|
+      reviews[:results].map do |review|
         Review.new(review[:author], review[:content])
       end
     end

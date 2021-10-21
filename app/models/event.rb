@@ -8,7 +8,7 @@ class Event < ApplicationRecord
 
   def past_date?
     unless starttime.present? && starttime > DateTime.now
-      errors.add(:starttime, "It must be some kind of hot tub time machine... Date must be in the future!")
+      errors.add(:starttime, 'It must be some kind of hot tub time machine... Date must be in the future!')
     end
   end
 end

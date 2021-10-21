@@ -16,6 +16,10 @@ RSpec.describe 'Movies Index' do
 
       stub_request(:get, "https://api.themoviedb.org/3/search/movie?api_key=#{ENV["movie_api_key"]}&query=batman").to_return(body: File.read(File.join('spec', 'fixtures', 'tmdb_search_batman.json')))
 
+      stub_request(:get, "https://api.themoviedb.org/3/search/movie?api_key=#{ENV["movie_api_key"]}&query=fight").to_return(body: File.read(File.join('spec', 'fixtures', 'tmdb_search_fight_page1.json')))
+      stub_request(:get, "https://api.themoviedb.org/3/search/movie?api_key=#{ENV["movie_api_key"]}&query=fight&page=2").to_return(body: File.read(File.join('spec', 'fixtures', 'tmdb_search_fight_page2.json')))
+
+
       @user1 = User.create!(email: "doggass420@butt.com", password: 'password', username: 'PresidentBush')
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user1)
       allow_any_instance_of(ApplicationController).to receive(:user_present?).and_return(@user1)
@@ -51,20 +55,25 @@ RSpec.describe 'Movies Index' do
             click_on "Search"
 
             expect(page).to have_link("batman v superman ultimate edition")
-            click_on "batman v superman ultimate edition"
+          end
 
-            expect(current_path).to eq(details_path)
+          it 'Returns 40 search results if the total_pages is greater than 1' do
+            fill_in 'query', with: 'fight'
+            click_on "Search"
+
+            expect(page).to have_content('championship fight')
           end
         end
 
-        # context 'with invalid parameters' do
-        #   it 'Returns no results message' do
-        #     fill_in 'query', with: '%'
-        #     click_on("Search")
-        #
-        #     expect(page).to have_content('No movies match your search.')
-        #   end
-        # end
+        context 'with invalid parameters' do
+          it 'Returns no results message' do
+            fill_in 'query', with: ''
+            click_on("Search")
+            within("#flashes") do
+              expect(page).to have_content('One time, she punched me in the face. It was awesome. Invalid Search')
+            end
+          end
+        end
       end
     end
   end

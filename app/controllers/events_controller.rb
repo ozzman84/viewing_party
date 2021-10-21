@@ -31,10 +31,6 @@ class EventsController < ApplicationController
     params.require(:event).permit(:title, :starttime, :duration, attendees_attributes: :user_id)
   end
 
-  def movie_params
-    params.permit(:movie_id)
-  end
-
   def set_current_movie
     session[:movie_id] ||= params[:movie_id]
   end

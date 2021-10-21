@@ -1,35 +1,39 @@
-<h1>Details#show</h1>
-<%= "#{@movie.name}" %>
+<div class='container'>
+  <h1><%= "#{@movie.name}" %></h1>
+<div/>
 
-<div class='container' id='create-party'>
+<div class='container text-center' id='create-party'>
   <%= button_to 'Create A Viewing Party', new_event_path(id: @movie.id), method: :get, params: { movie_id: @movie.id }, local: true %>
 </div>
 
-<div id="run-time">
-  <h5>Run Time: </h5>
-  <%= "#{@movie.run_time}" %>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-5 col-md-6" id="run-time"><h5>Run Time: <%= "#{@movie.run_time}" %></h5></div>
+      <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0" id="genres"><h5>Generes: </h5>
+        <% @movie.genres.each do |genere| %>
+          <%= "#{genere[:name]}" %>
+        <% end %>
+      </div>
+    </div>
+  <div class="row">
+    <div class="col-sm-6 col-md-5 col-lg-6"></div>
+      <div class="col-sm-6 col-md-5 offset-md-2 col-lg-6 offset-lg-0"></div>
+  </div>
 </div>
 
-<div id="genres">
-  <h5>Generes: </h5>
-  <% @movie.genres.each do |genere| %>
-    <%= "#{genere[:name]}" %><br/>
-  <% end %>
-</div>
-
-<div id="summary">
+<div class='container' id="summary">
   <h5>Summary: </h5>
   <%= "#{@movie.summary}" %>
 </div>
 
-<div id="cast">
+<div class='container' id="cast">
   <h5>Cast: </h5>
   <% @movie.cast.each do |member| %>
-    <p><%= member.name %> As <%= member.role %></p>
+    <p><%= "#{member.name} As #{member.role}" %></p>
   <% end %>
 </div>
 
-<div id="reviews">
+<div class='container' id="reviews">
   <% if @movie.reviews != 'No Reviews Recorded' %>
     <h5>Reviews: </h5>
     <% @movie.reviews.each do |review| %>

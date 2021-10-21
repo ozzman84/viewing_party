@@ -34,5 +34,4 @@ class EventsController < ApplicationController
   def set_current_movie
     session[:movie_id] ||= params[:movie_id]
   end
-
 end

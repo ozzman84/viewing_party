@@ -1,38 +1,50 @@
 <section id="movies-home">
-  <%= link_to "Top 40 Movies", search: 'top_40'%>
+  <div class='container'>
+    <%= link_to "Top 40 Movies", search: 'top_40'%><br/>
+  </div>
 
-  <%= form_with url: movies_path, method: :get, local: true do |form| %>
-    <%= form.label :query %>
-    <%= form.text_field :query %>
-    <%= form.submit "Search" %>
-  <% end %>
+  <div class='container text-center' style='mr-auto;'>
+    <%= form_with url: movies_path, method: :get, local: true do |form| %>
+      <%= form.text_field :query, placeholder: 'Movie Search by Title' %>
+      <%= form.submit "Search" %>
+    <% end %>
+  </div>
+
+<br/>
 
   <% if params[:query] %>
-    <h3>Movies Search Results For <%= params[:query] %></h3>
+    <h3 style='color:red'>Movies Search Results For <%= params[:query] %></h3>
   <% end %>
 
   <% if params[:search] == "top_40" %>
-    <h3>Top 40 Movies</h3>
+    <div class='container' style='color:red'>
+      <h3 style='color:red'>Top 40 Movies</h3>
+    </div>
   <% end %>
 </section>
 
-  <% if !@movies.nil? %>
-    <table class="table table-hover" id="movie-search">
-      <thead class='table-dark'>
-        <tr>
-          <th scope="col">Movie Id</th>
-          <th scope="col">Movie Name</th>
-          <th scope="col">Vote Count</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @movies.each do |movie| %>
-        <tr>
-            <th id="movie-search-item-<%= movie.id %>" scope="row"><%= movie.id %></th>
-            <td><%= link_to "#{movie.name}", details_path(id: movie.id) %></td>
-            <td><%= movie.vote_count %></td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
+<br/>
+
+<% if !@movies.nil? %>
+<div class='row'>
+  <% @movies.each_with_index do |movie, rank| %>
+    <div class='col mb-6 mt-6'>
+      <div class='container'>
+        <div class="card justify-content-between" style="width: 15rem; background-color:black;">
+          <%= image_tag 'coming-soon-gf91e0e497_640.jpg', class: "card-img-top" %>
+          <div class="card-body" style='color:white'>
+            <h5 class="card-title"><%= link_to "#{movie.name}", details_path(id: movie.id) %></h5>
+            <p class="card-text"><%= "Vote Count: #{movie.vote_count}\r\nRank: #{rank}" %></p>
+            <a href="<%= details_path(id: movie.id) %>" class="btn btn-primary" style='background-color:red;'><%= "Movie Details" %></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br/>
   <% end %>
+</div>
+<% end %>
+
+<br/>
+
+<br/>

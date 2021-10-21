@@ -1,5 +1,5 @@
-<h1>Details#show</h1>
-<%= "#{@movie.name}" %>
+
+<h3><%= "#{@movie.name}" %></h3>
 
 <div class='container' id='create-party'>
   <%= button_to 'Create A Viewing Party', new_event_path(id: @movie.id), method: :get, params: { movie_id: @movie.id }, local: true %>
@@ -22,19 +22,32 @@
   <%= "#{@movie.summary}" %>
 </div>
 
-<div id="cast">
-  <h5>Cast: </h5>
-  <% @movie.cast.each do |member| %>
-    <p><%= member.name %> As <%= member.role %></p>
-  <% end %>
+<h5>Cast: </h5>
+<div class="container" id="cast">
+  <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+
+    <% @movie.cast.each do |member| %>
+      <div class="col"><%= member.name %> As <%= member.role %></div>
+    <% end %>
+  </div>
 </div>
 
-<div id="reviews">
-  <% if @movie.reviews != 'No Reviews Recorded' %>
-    <h5>Reviews: </h5>
-    <% @movie.reviews.each do |review| %>
-    <%= review.author %><br/>
-    <%= review.content %><br/>
-    <% end %>
+
+
+<% if @movie.reviews != "No Reviews Recorded" %>
+<h5>Reviews: </h5>
+  <% @movie.reviews.each do |review| %>
+    <div class="card">
+      <div class="card-header">
+        <%= review.author %>
+      </div>
+      <div class="card-body">
+        <p class="card-text"><%= review.content %></p>
+      </div>
+    </div>
   <% end %>
-</div>
+<% end %>
+
+<% if @movie.reviews == "No Reviews Recorded" %>
+  <h3><%= @movie.reviews %></h3>
+<% end %>

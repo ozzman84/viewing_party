@@ -57,14 +57,14 @@ RSpec.describe 'Movies Index' do
           end
         end
 
-        # context 'with invalid parameters' do
-        #   it 'Returns no results message' do
-        #     fill_in 'query', with: '%'
-        #     click_on("Search")
-        #
-        #     expect(page).to have_content('No movies match your search.')
-        #   end
-        # end
+        context 'with invalid parameters' do
+          it 'Returns no results message' do
+            fill_in 'query', with: '%'
+            click_on("Search")
+
+            expect(page).to have_content('One time, she punched me in the face. Invalid Search')
+          end
+        end
       end
     end
   end
